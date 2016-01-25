@@ -1,4 +1,4 @@
-﻿using NUnit.Framework;
+using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,8 +13,9 @@ namespace AbcBank.Test
         [Test]
         public void transaction()
         {
-            Transaction t = new Transaction(5);
+            Transaction t = new Transaction(5, "withdraw");
             Assert.AreEqual(true, t is Transaction);
         }
     }
 }
+
