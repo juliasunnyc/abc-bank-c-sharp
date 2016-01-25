@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,25 +6,54 @@ using System.Threading.Tasks;
 
 namespace AbcBank
 {
-    public class Bank
+
+    public abstract class bank
+    {
+        public abstract List<Customer> Customers();
+        public virtual string bankName { get; set; }
+        public abstract void addCustomer(Customer customer);
+        public abstract String customerSummary();
+        public abstract double totalInterestPaid();     
+    }
+
+    public class Bank : bank
     {
         private List<Customer> customers;
+        private string bankname;
 
         public Bank()
-        {
+       {
             customers = new List<Customer>();
+       } 
+
+         public override List<Customer> Customers()
+        {    
+                return customers;  
         }
 
-        public void addCustomer(Customer customer)
+         public override string bankName
+        {
+            get
+            {
+                return bankname ;
+            }
+            set
+            {
+                  bankname= value;
+            }
+        }
+
+       
+        public override void addCustomer(Customer customer)
         {
             customers.Add(customer);
         }
 
-        public String customerSummary()
+        public override String customerSummary()
         {
             String summary = "Customer Summary";
             foreach (Customer c in customers)
-                summary += "\n - " + c.getName() + " (" + format(c.getNumberOfAccounts(), "account") + ")";
+                summary += "\n - " + c.Name + " (" + format(c.getNumberOfAccounts(), "account") + ")";
             return summary;
         }
 
@@ -35,7 +64,7 @@ namespace AbcBank
             return number + " " + (number == 1 ? word : word + "s");
         }
 
-        public double totalInterestPaid()
+        public override double totalInterestPaid()
         {
             double total = 0;
             foreach (Customer c in customers)
@@ -43,7 +72,7 @@ namespace AbcBank
             return total;
         }
 
-        public String getFirstCustomer()
+       /* public overide String getFirstCustomer()
         {
             try
             {
@@ -55,6 +84,6 @@ namespace AbcBank
                 Console.WriteLine(e.ToString());
                 return "Error";
             }
-        }
+        }*/
     }
 }
